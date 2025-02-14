@@ -1,0 +1,7 @@
+scrapy
+beautifulsoup4
+pymysql
+psycopg2
+pymongo
+pandas
+docker

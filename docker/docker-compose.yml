@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver_container
+    environment:
+      SA_PASSWORD: "sapassword"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    restart: always
+    networks:
+      - my_network
+
+  scrapy:
+    build: 
+      context: ..
+      dockerfile: docker/Dockerfile  # Chỉ định đúng đường dẫn Dockerfile
+    container_name: scrapy_container
+    depends_on:
+      - sqlserver
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
